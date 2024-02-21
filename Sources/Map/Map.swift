@@ -56,7 +56,7 @@ extension Map {
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation, [AnnotationItems.Element]) -> MapAnnotation? = { _, _ in nil },
         overlayItems: OverlayItems,
         @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
-        mapViewManipulation: (MKMapVIew) -> Void = nil
+        mapViewManipulation: (MKMapView) -> Void = nil
     ) {
         self.usesRegion = true
         self._coordinateRegion = coordinateRegion
@@ -86,7 +86,7 @@ extension Map {
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation, [AnnotationItems.Element]) -> MapAnnotation? = { _, _ in nil },
         overlayItems: OverlayItems,
         @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
-        mapViewManipulation: (MKMapVIew) -> Void = nil
+        mapViewManipulation: (MKMapView) -> Void = nil
     ) {
         self.usesRegion = false
         self._coordinateRegion = .constant(.init())
@@ -119,7 +119,7 @@ extension Map {
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation, [AnnotationItems.Element]) -> MapAnnotation? = { _, _ in nil },
         overlayItems: OverlayItems,
         @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
-        mapViewManipulation: (MKMapVIew) -> Void = nil
+        mapViewManipulation: (MKMapView) -> Void = nil
     ) {
         self.usesRegion = true
         self._coordinateRegion = coordinateRegion
@@ -156,7 +156,7 @@ extension Map {
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation, [AnnotationItems.Element]) -> MapAnnotation? = { _, _ in nil },
         overlayItems: OverlayItems,
         @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
-        mapViewManipulation: (MKMapVIew) -> Void = nil
+        mapViewManipulation: (MKMapView) -> Void = nil
     ) {
         self.usesRegion = false
         self._coordinateRegion = .constant(.init())
@@ -198,7 +198,7 @@ extension Map {
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation, [AnnotationItems.Element]) -> MapAnnotation? = { _, _ in nil },
         overlayItems: OverlayItems,
         @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
-        mapViewManipulation: (MKMapVIew) -> Void = nil
+        mapViewManipulation: (MKMapView) -> Void = nil
     ) {
         self.usesRegion = true
         self._coordinateRegion = coordinateRegion
@@ -234,7 +234,7 @@ extension Map {
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation, [AnnotationItems.Element]) -> MapAnnotation? = { _, _ in nil },
         overlayItems: OverlayItems,
         @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
-        mapViewManipulation: (MKMapVIew) -> Void = nil
+        mapViewManipulation: (MKMapView) -> Void = nil
     ) {
         self.usesRegion = false
         self._coordinateRegion = .constant(.init())
@@ -285,7 +285,7 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>] {
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation) -> MapAnnotation? = { _ in nil },
         overlayItems: OverlayItems,
         @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
-        mapViewManipulation: (MKMapVIew) -> Void = nil
+        mapViewManipulation: (MKMapView) -> Void = nil
     ) {
         self.init(
             coordinateRegion: coordinateRegion,
@@ -316,7 +316,7 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>] {
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation) -> MapAnnotation? = { _ in nil },
         overlayItems: OverlayItems,
         @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
-        mapViewManipulation: (MKMapVIew) -> Void = nil
+        mapViewManipulation: (MKMapView) -> Void = nil
     ) {
         self.init(
             mapRect: mapRect,
@@ -350,7 +350,7 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>] {
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation) -> MapAnnotation? = { _ in nil },
         overlayItems: OverlayItems,
         @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
-        mapViewManipulation: (MKMapVIew) -> Void = nil
+        mapViewManipulation: (MKMapView) -> Void = nil
     ) {
         self.init(
             coordinateRegion: coordinateRegion,
@@ -384,7 +384,7 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>] {
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation) -> MapAnnotation? = { _ in nil },
         overlayItems: OverlayItems,
         @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
-        mapViewManipulation: (MKMapVIew) -> Void = nil
+        mapViewManipulation: (MKMapView) -> Void = nil
     ) {
         self.init(
             mapRect: mapRect,
@@ -423,7 +423,7 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>] {
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation) -> MapAnnotation? = { _ in nil },
         overlayItems: OverlayItems,
         @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
-        mapViewManipulation: (MKMapVIew) -> Void = nil
+        mapViewManipulation: (MKMapView) -> Void = nil
     ) {
         self.init(
             coordinateRegion: coordinateRegion,
@@ -456,7 +456,7 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>] {
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation) -> MapAnnotation? = { _ in nil },
         overlayItems: OverlayItems,
         @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
-        mapViewManipulation: (MKMapVIew) -> Void = nil
+        mapViewManipulation: (MKMapView) -> Void = nil
     ) {
         self.init(
             mapRect: mapRect,
@@ -537,7 +537,7 @@ extension Map where OverlayItems == [IdentifiableObject<MKOverlay>] {
                 MKOverlayRenderer(overlay: overlay)
             }
         },
-        mapViewManipulation: (MKMapVIew) -> Void = nil
+        mapViewManipulation: (MKMapView) -> Void = nil
     ) {
         self.init(
             mapRect: mapRect,
@@ -572,7 +572,7 @@ extension Map where OverlayItems == [IdentifiableObject<MKOverlay>] {
                 MKOverlayRenderer(overlay: overlay)
             }
         },
-        mapViewManipulation: (MKMapVIew) -> Void = nil
+        mapViewManipulation: (MKMapView) -> Void = nil
     ) {
         self.init(
             coordinateRegion: coordinateRegion,
@@ -608,7 +608,7 @@ extension Map where OverlayItems == [IdentifiableObject<MKOverlay>] {
                 MKOverlayRenderer(overlay: overlay)
             }
         },
-        mapViewManipulation: (MKMapVIew) -> Void = nil
+        mapViewManipulation: (MKMapView) -> Void = nil
     ) {
         self.init(
             mapRect: mapRect,
@@ -649,7 +649,7 @@ extension Map where OverlayItems == [IdentifiableObject<MKOverlay>] {
                 MKOverlayRenderer(overlay: overlay)
             }
         },
-        mapViewManipulation: (MKMapVIew) -> Void = nil
+        mapViewManipulation: (MKMapView) -> Void = nil
     ) {
         self.init(
             coordinateRegion: coordinateRegion,
@@ -684,7 +684,7 @@ extension Map where OverlayItems == [IdentifiableObject<MKOverlay>] {
                 MKOverlayRenderer(overlay: overlay)
             }
         },
-        mapViewManipulation: (MKMapVIew) -> Void = nil
+        mapViewManipulation: (MKMapView) -> Void = nil
     ) {
         self.init(
             mapRect: mapRect,
@@ -734,7 +734,7 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>], Overl
                 MKOverlayRenderer(overlay: overlay)
             }
         },
-        mapViewManipulation: (MKMapVIew) -> Void = nil
+        mapViewManipulation: (MKMapView) -> Void = nil
     ) {
         self.init(
             coordinateRegion: coordinateRegion,
@@ -770,7 +770,7 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>], Overl
                 MKOverlayRenderer(overlay: overlay)
             }
         },
-        mapViewManipulation: (MKMapVIew) -> Void = nil
+        mapViewManipulation: (MKMapView) -> Void = nil
     ) {
         self.init(
             mapRect: mapRect,
@@ -808,7 +808,7 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>], Overl
                 MKOverlayRenderer(overlay: overlay)
             }
         },
-        mapViewManipulation: (MKMapVIew) -> Void = nil
+        mapViewManipulation: (MKMapView) -> Void = nil
     ) {
         self.init(
             coordinateRegion: coordinateRegion,
@@ -847,7 +847,7 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>], Overl
                 MKOverlayRenderer(overlay: overlay)
             }
         },
-        mapViewManipulation: (MKMapVIew) -> Void = nil
+        mapViewManipulation: (MKMapView) -> Void = nil
     ) {
         self.init(
             mapRect: mapRect,
@@ -893,7 +893,7 @@ extension Map
                 MKOverlayRenderer(overlay: overlay)
             }
         },
-        mapViewManipulation: (MKMapVIew) -> Void = nil
+        mapViewManipulation: (MKMapView) -> Void = nil
     ) {
         self.init(
             coordinateRegion: coordinateRegion,
@@ -931,7 +931,7 @@ extension Map
                 MKOverlayRenderer(overlay: overlay)
             }
         },
-        mapViewManipulation: (MKMapVIew) -> Void = nil
+        mapViewManipulation: (MKMapView) -> Void = nil
     ) {
         self.init(
             mapRect: mapRect,
