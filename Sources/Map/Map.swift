@@ -36,6 +36,7 @@ public struct Map<AnnotationItems: RandomAccessCollection, OverlayItems: RandomA
     let overlayItems: OverlayItems
     let overlayContent: (OverlayItems.Element) -> MapOverlay
 
+    let mapViewManipulation: ((MKMapView) -> Void)?
 }
 
 // MARK: - Initialization
@@ -54,7 +55,8 @@ extension Map {
         @MapAnnotationBuilder annotationContent: @escaping (AnnotationItems.Element) -> MapAnnotation,
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation, [AnnotationItems.Element]) -> MapAnnotation? = { _, _ in nil },
         overlayItems: OverlayItems,
-        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay
+        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
+        mapViewManipulation: (MKMapVIew) -> Void = nil
     ) {
         self.usesRegion = true
         self._coordinateRegion = coordinateRegion
@@ -70,6 +72,7 @@ extension Map {
         self.clusterAnnotation = clusterAnnotation
         self.overlayItems = overlayItems
         self.overlayContent = overlayContent
+        self.mapViewManipulation = mapViewManipulation
     }
 
     public init(
@@ -82,7 +85,8 @@ extension Map {
         @MapAnnotationBuilder annotationContent: @escaping (AnnotationItems.Element) -> MapAnnotation,
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation, [AnnotationItems.Element]) -> MapAnnotation? = { _, _ in nil },
         overlayItems: OverlayItems,
-        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay
+        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
+        mapViewManipulation: (MKMapVIew) -> Void = nil
     ) {
         self.usesRegion = false
         self._coordinateRegion = .constant(.init())
@@ -98,6 +102,7 @@ extension Map {
         self.clusterAnnotation = clusterAnnotation
         self.overlayItems = overlayItems
         self.overlayContent = overlayContent
+        self.mapViewManipulation = mapViewManipulation
     }
 
     @available(macOS 11, *)
@@ -113,7 +118,8 @@ extension Map {
         @MapAnnotationBuilder annotationContent: @escaping (AnnotationItems.Element) -> MapAnnotation,
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation, [AnnotationItems.Element]) -> MapAnnotation? = { _, _ in nil },
         overlayItems: OverlayItems,
-        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay
+        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
+        mapViewManipulation: (MKMapVIew) -> Void = nil
     ) {
         self.usesRegion = true
         self._coordinateRegion = coordinateRegion
@@ -134,6 +140,7 @@ extension Map {
         self.clusterAnnotation = clusterAnnotation
         self.overlayItems = overlayItems
         self.overlayContent = overlayContent
+        self.mapViewManipulation = mapViewManipulation
     }
 
     @available(macOS 11, *)
@@ -148,7 +155,8 @@ extension Map {
         @MapAnnotationBuilder annotationContent: @escaping (AnnotationItems.Element) -> MapAnnotation,
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation, [AnnotationItems.Element]) -> MapAnnotation? = { _, _ in nil },
         overlayItems: OverlayItems,
-        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay
+        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
+        mapViewManipulation: (MKMapVIew) -> Void = nil
     ) {
         self.usesRegion = false
         self._coordinateRegion = .constant(.init())
@@ -169,6 +177,7 @@ extension Map {
         self.clusterAnnotation = clusterAnnotation
         self.overlayItems = overlayItems
         self.overlayContent = overlayContent
+        self.mapViewManipulation = mapViewManipulation
     }
 
 }
@@ -188,7 +197,8 @@ extension Map {
         @MapAnnotationBuilder annotationContent: @escaping (AnnotationItems.Element) -> MapAnnotation,
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation, [AnnotationItems.Element]) -> MapAnnotation? = { _, _ in nil },
         overlayItems: OverlayItems,
-        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay
+        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
+        mapViewManipulation: (MKMapVIew) -> Void = nil
     ) {
         self.usesRegion = true
         self._coordinateRegion = coordinateRegion
@@ -209,6 +219,7 @@ extension Map {
         self.clusterAnnotation = clusterAnnotation
         self.overlayItems = overlayItems
         self.overlayContent = overlayContent
+        self.mapViewManipulation = mapViewManipulation
     }
 
     public init(
@@ -222,7 +233,8 @@ extension Map {
         @MapAnnotationBuilder annotationContent: @escaping (AnnotationItems.Element) -> MapAnnotation,
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation, [AnnotationItems.Element]) -> MapAnnotation? = { _, _ in nil },
         overlayItems: OverlayItems,
-        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay
+        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
+        mapViewManipulation: (MKMapVIew) -> Void = nil
     ) {
         self.usesRegion = false
         self._coordinateRegion = .constant(.init())
@@ -243,6 +255,7 @@ extension Map {
         self.clusterAnnotation = clusterAnnotation
         self.overlayItems = overlayItems
         self.overlayContent = overlayContent
+        self.mapViewManipulation = mapViewManipulation
     }
 
 }
@@ -271,7 +284,8 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>] {
         },
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation) -> MapAnnotation? = { _ in nil },
         overlayItems: OverlayItems,
-        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay
+        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
+        mapViewManipulation: (MKMapVIew) -> Void = nil
     ) {
         self.init(
             coordinateRegion: coordinateRegion,
@@ -283,7 +297,8 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>] {
             annotationContent: { annotationContent($0.object) },
             clusterAnnotation: { annotation, _ in clusterAnnotation(annotation) },
             overlayItems: overlayItems,
-            overlayContent: overlayContent
+            overlayContent: overlayContent,
+            mapViewManipulation: mapViewManipulation
         )
     }
 
@@ -300,7 +315,8 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>] {
         },
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation) -> MapAnnotation? = { _ in nil },
         overlayItems: OverlayItems,
-        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay
+        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
+        mapViewManipulation: (MKMapVIew) -> Void = nil
     ) {
         self.init(
             mapRect: mapRect,
@@ -312,7 +328,8 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>] {
             annotationContent: { annotationContent($0.object) },
             clusterAnnotation: { annotation, _ in clusterAnnotation(annotation) },
             overlayItems: overlayItems,
-            overlayContent: overlayContent
+            overlayContent: overlayContent,
+            mapViewManipulation: mapViewManipulation
         )
     }
 
@@ -332,7 +349,8 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>] {
         },
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation) -> MapAnnotation? = { _ in nil },
         overlayItems: OverlayItems,
-        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay
+        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
+        mapViewManipulation: (MKMapVIew) -> Void = nil
     ) {
         self.init(
             coordinateRegion: coordinateRegion,
@@ -345,7 +363,8 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>] {
             annotationContent: { annotationContent($0.object) },
             clusterAnnotation: { annotation, _ in clusterAnnotation(annotation) },
             overlayItems: overlayItems,
-            overlayContent: overlayContent
+            overlayContent: overlayContent,
+            mapViewManipulation: mapViewManipulation
         )
     }
 
@@ -364,7 +383,8 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>] {
         },
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation) -> MapAnnotation? = { _ in nil },
         overlayItems: OverlayItems,
-        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay
+        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
+        mapViewManipulation: (MKMapVIew) -> Void = nil
     ) {
         self.init(
             mapRect: mapRect,
@@ -377,7 +397,8 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>] {
             annotationContent: { annotationContent($0.object) },
             clusterAnnotation: { annotation, _ in clusterAnnotation(annotation) },
             overlayItems: overlayItems,
-            overlayContent: overlayContent
+            overlayContent: overlayContent,
+            mapViewManipulation: mapViewManipulation
         )
     }
 
@@ -401,7 +422,8 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>] {
         },
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation) -> MapAnnotation? = { _ in nil },
         overlayItems: OverlayItems,
-        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay
+        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
+        mapViewManipulation: (MKMapVIew) -> Void = nil
     ) {
         self.init(
             coordinateRegion: coordinateRegion,
@@ -414,7 +436,8 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>] {
             annotationContent: { annotationContent($0.object) },
             clusterAnnotation: { annotation, _ in clusterAnnotation(annotation) },
             overlayItems: overlayItems,
-            overlayContent: overlayContent
+            overlayContent: overlayContent,
+            mapViewManipulation: mapViewManipulation
         )
     }
 
@@ -432,7 +455,8 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>] {
         },
         @OptionalMapAnnotationBuilder clusterAnnotation: @escaping (MKClusterAnnotation) -> MapAnnotation? = { _ in nil },
         overlayItems: OverlayItems,
-        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay
+        @MapOverlayBuilder overlayContent: @escaping (OverlayItems.Element) -> MapOverlay,
+        mapViewManipulation: (MKMapVIew) -> Void = nil
     ) {
         self.init(
             mapRect: mapRect,
@@ -445,7 +469,8 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>] {
             annotationContent: { annotationContent($0.object) },
             clusterAnnotation: { annotation, _ in clusterAnnotation(annotation) },
             overlayItems: overlayItems,
-            overlayContent: overlayContent
+            overlayContent: overlayContent,
+            mapViewManipulation: mapViewManipulation
         )
 
     }
@@ -491,7 +516,8 @@ extension Map where OverlayItems == [IdentifiableObject<MKOverlay>] {
             annotationContent: annotationContent,
             clusterAnnotation: clusterAnnotation,
             overlayItems: overlays.map(IdentifiableObject.init),
-            overlayContent: { overlayContent($0.object) }
+            overlayContent: { overlayContent($0.object) },
+            mapViewManipulation: mapViewManipulation
         )
     }
 
@@ -510,7 +536,8 @@ extension Map where OverlayItems == [IdentifiableObject<MKOverlay>] {
             return RendererMapOverlay(overlay: overlay) { _, overlay in
                 MKOverlayRenderer(overlay: overlay)
             }
-        }
+        },
+        mapViewManipulation: (MKMapVIew) -> Void = nil
     ) {
         self.init(
             mapRect: mapRect,
@@ -522,7 +549,8 @@ extension Map where OverlayItems == [IdentifiableObject<MKOverlay>] {
             annotationContent: annotationContent,
             clusterAnnotation: clusterAnnotation,
             overlayItems: overlays.map(IdentifiableObject.init),
-            overlayContent: { overlayContent($0.object) }
+            overlayContent: { overlayContent($0.object) },
+            mapViewManipulation: mapViewManipulation
         )
     }
 
@@ -543,7 +571,8 @@ extension Map where OverlayItems == [IdentifiableObject<MKOverlay>] {
             return RendererMapOverlay(overlay: overlay) { _, overlay in
                 MKOverlayRenderer(overlay: overlay)
             }
-        }
+        },
+        mapViewManipulation: (MKMapVIew) -> Void = nil
     ) {
         self.init(
             coordinateRegion: coordinateRegion,
@@ -556,7 +585,8 @@ extension Map where OverlayItems == [IdentifiableObject<MKOverlay>] {
             annotationContent: annotationContent,
             clusterAnnotation: clusterAnnotation,
             overlayItems: overlays.map(IdentifiableObject.init),
-            overlayContent: { overlayContent($0.object) }
+            overlayContent: { overlayContent($0.object) },
+            mapViewManipulation: mapViewManipulation
         )
     }
 
@@ -577,7 +607,8 @@ extension Map where OverlayItems == [IdentifiableObject<MKOverlay>] {
             return RendererMapOverlay(overlay: overlay) { _, overlay in
                 MKOverlayRenderer(overlay: overlay)
             }
-        }
+        },
+        mapViewManipulation: (MKMapVIew) -> Void = nil
     ) {
         self.init(
             mapRect: mapRect,
@@ -590,7 +621,8 @@ extension Map where OverlayItems == [IdentifiableObject<MKOverlay>] {
             annotationContent: annotationContent,
             clusterAnnotation: clusterAnnotation,
             overlayItems: overlays.map(IdentifiableObject.init),
-            overlayContent: { overlayContent($0.object) }
+            overlayContent: { overlayContent($0.object) },
+            mapViewManipulation: mapViewManipulation
         )
     }
 
@@ -616,7 +648,8 @@ extension Map where OverlayItems == [IdentifiableObject<MKOverlay>] {
             return RendererMapOverlay(overlay: overlay) { _, overlay in
                 MKOverlayRenderer(overlay: overlay)
             }
-        }
+        },
+        mapViewManipulation: (MKMapVIew) -> Void = nil
     ) {
         self.init(
             coordinateRegion: coordinateRegion,
@@ -629,7 +662,8 @@ extension Map where OverlayItems == [IdentifiableObject<MKOverlay>] {
             annotationContent: annotationContent,
             clusterAnnotation: clusterAnnotation,
             overlayItems: overlays.map(IdentifiableObject.init),
-            overlayContent: { overlayContent($0.object) }
+            overlayContent: { overlayContent($0.object) },
+            mapViewManipulation: mapViewManipulation
         )
     }
 
@@ -649,7 +683,8 @@ extension Map where OverlayItems == [IdentifiableObject<MKOverlay>] {
             return RendererMapOverlay(overlay: overlay) { _, overlay in
                 MKOverlayRenderer(overlay: overlay)
             }
-        }
+        },
+        mapViewManipulation: (MKMapVIew) -> Void = nil
     ) {
         self.init(
             mapRect: mapRect,
@@ -662,7 +697,8 @@ extension Map where OverlayItems == [IdentifiableObject<MKOverlay>] {
             annotationContent: annotationContent,
             clusterAnnotation: clusterAnnotation,
             overlayItems: overlays.map(IdentifiableObject.init),
-            overlayContent: { overlayContent($0.object) }
+            overlayContent: { overlayContent($0.object) },
+            mapViewManipulation: mapViewManipulation
         )
     }
 
@@ -697,7 +733,8 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>], Overl
             return RendererMapOverlay(overlay: overlay) { _, overlay in
                 MKOverlayRenderer(overlay: overlay)
             }
-        }
+        },
+        mapViewManipulation: (MKMapVIew) -> Void = nil
     ) {
         self.init(
             coordinateRegion: coordinateRegion,
@@ -709,7 +746,8 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>], Overl
             annotationContent: { annotationContent($0.object) },
             clusterAnnotation: { annotation, _ in clusterAnnotation(annotation) },
             overlayItems: overlays.map(IdentifiableObject.init),
-            overlayContent: { overlayContent($0.object) }
+            overlayContent: { overlayContent($0.object) },
+            mapViewManipulation: mapViewManipulation
         )
     }
 
@@ -731,7 +769,8 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>], Overl
             return RendererMapOverlay(overlay: overlay) { _, overlay in
                 MKOverlayRenderer(overlay: overlay)
             }
-        }
+        },
+        mapViewManipulation: (MKMapVIew) -> Void = nil
     ) {
         self.init(
             mapRect: mapRect,
@@ -743,7 +782,8 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>], Overl
             annotationContent: { annotationContent($0.object) },
             clusterAnnotation: { annotation, _ in clusterAnnotation(annotation) },
             overlayItems: overlays.map(IdentifiableObject.init),
-            overlayContent: { overlayContent($0.object) }
+            overlayContent: { overlayContent($0.object) },
+            mapViewManipulation: mapViewManipulation
         )
     }
 
@@ -767,7 +807,8 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>], Overl
             return RendererMapOverlay(overlay: overlay) { _, overlay in
                 MKOverlayRenderer(overlay: overlay)
             }
-        }
+        },
+        mapViewManipulation: (MKMapVIew) -> Void = nil
     ) {
         self.init(
             coordinateRegion: coordinateRegion,
@@ -780,7 +821,8 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>], Overl
             annotationContent: { annotationContent($0.object) },
             clusterAnnotation: { annotation, _ in clusterAnnotation(annotation) },
             overlayItems: overlays.map(IdentifiableObject.init),
-            overlayContent: { overlayContent($0.object) }
+            overlayContent: { overlayContent($0.object) },
+            mapViewManipulation: mapViewManipulation
         )
     }
 
@@ -804,7 +846,8 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>], Overl
             return RendererMapOverlay(overlay: overlay) { _, overlay in
                 MKOverlayRenderer(overlay: overlay)
             }
-        }
+        },
+        mapViewManipulation: (MKMapVIew) -> Void = nil
     ) {
         self.init(
             mapRect: mapRect,
@@ -817,7 +860,8 @@ extension Map where AnnotationItems == [IdentifiableObject<MKAnnotation>], Overl
             annotationContent: { annotationContent($0.object) },
             clusterAnnotation: { annotation, _ in clusterAnnotation(annotation) },
             overlayItems: overlays.map(IdentifiableObject.init),
-            overlayContent: { overlayContent($0.object) }
+            overlayContent: { overlayContent($0.object) },
+            mapViewManipulation: mapViewManipulation
         )
     }
 
@@ -848,7 +892,8 @@ extension Map
             return RendererMapOverlay(overlay: overlay) { _, overlay in
                 MKOverlayRenderer(overlay: overlay)
             }
-        }
+        },
+        mapViewManipulation: (MKMapVIew) -> Void = nil
     ) {
         self.init(
             coordinateRegion: coordinateRegion,
@@ -861,7 +906,8 @@ extension Map
             annotationContent: { annotationContent($0.object) },
             clusterAnnotation: { annotation, _ in clusterAnnotation(annotation) },
             overlayItems: overlays.map(IdentifiableObject.init),
-            overlayContent: { overlayContent($0.object) }
+            overlayContent: { overlayContent($0.object) },
+            mapViewManipulation: mapViewManipulation
         )
     }
 
@@ -884,7 +930,8 @@ extension Map
             return RendererMapOverlay(overlay: overlay) { _, overlay in
                 MKOverlayRenderer(overlay: overlay)
             }
-        }
+        },
+        mapViewManipulation: (MKMapVIew) -> Void = nil
     ) {
         self.init(
             mapRect: mapRect,
@@ -897,7 +944,8 @@ extension Map
             annotationContent: { annotationContent($0.object) },
             clusterAnnotation: { annotation, _ in clusterAnnotation(annotation) },
             overlayItems: overlays.map(IdentifiableObject.init),
-            overlayContent: { overlayContent($0.object) }
+            overlayContent: { overlayContent($0.object) },
+            mapViewManipulation: mapViewManipulation
         )
     }
 
