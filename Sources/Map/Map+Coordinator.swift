@@ -57,6 +57,8 @@ extension Map {
             updateType(on: mapView, from: view, to: newView)
             updateUserTracking(on: mapView, from: view, to: newView)
 
+            newView.mapViewManipulation?(mapView)
+
             if let key = context.environment.mapKey {
                 MapRegistry[key] = mapView
             }
